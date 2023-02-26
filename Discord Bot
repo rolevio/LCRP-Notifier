@@ -92,10 +92,10 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-  if (message.content === '!start-monitoring') {
+  if (message.content === '!start') {
     startMonitoring();
   }
-  if (message.content === '!stop-monitoring') {
+  if (message.content === '!stop') {
     stopMonitoring();
   }
 });

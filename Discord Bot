@@ -34,7 +34,7 @@ async function checkForChanges() {
         const row = rows[i];
         for (let j = 0; j < row.length; j++) {
           if (row[j]) { // Check if the cell has a value
-            const message = `Column ${String.fromCharCode(65 + j)}, Row ${i + 1} in the spreadsheet has changed to: ${row[j]}`;
+            const message = `Possible Restock Occurred - Column ${String.fromCharCode(65 + j)}, Row ${i + 1} in the spreadsheet has changed to: ${row[j]}`;
             sendMessage(message);
           }
         }

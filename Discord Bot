@@ -21,7 +21,7 @@ async function sendMessage(message) {
   await webhook.send('@everyone ' + message); // Mention @everyone in the message
 }
 
-// Function to check for changes in the specified column of the spreadsheet
+// Function to check for changes in the specified columns and rows of the spreadsheet
 async function checkForChanges() {
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -30,11 +30,13 @@ async function checkForChanges() {
     });
     const rows = response.data.values;
     if (rows) {
-      for (let i = 1; i < rows.length; i++) { // Start from second row to exclude headers
+      for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        if (row[COLUMN - 1]) { // Check if the specified column has a value
-          const message = `Cell ${String.fromCharCode(65 + COLUMN - 1)}${i + 1} in the spreadsheet has changed to: ${row[COLUMN - 1]}`;
-          sendMessage(message);
+        for (let j = 0; j < row.length; j++) {
+          if (row[j]) { // Check if the cell has a value
+            const message = `Cell ${String.fromCharCode(65 + j)}${i + 1} in the spreadsheet has changed to: ${row[j]}`;
+            sendMessage(message);
+          }
         }
       }
     } else {
@@ -44,3 +46,4 @@ async function checkForChanges() {
     console.error(error);
   }
 }
+

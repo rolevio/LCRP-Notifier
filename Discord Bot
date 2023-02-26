@@ -11,8 +11,7 @@ const client = new Discord.Client();
 
 // Constants
 const SPREADSHEET_ID = '11wOVNL0OkzGjUrPF85o-7KNfC6vx2hdSYEDMbZWG4fg';
-const RANGE = 'Sheet1!A:E';
-const COLUMN = 3; // Change to the column number you want to track
+const RANGE = 'Sheet1!A1:U500';
 const DISCORD_WEBHOOK_URL = 'INSERT_DISCORD_WEBHOOK_URL_HERE';
 let isNotifying = false;
 

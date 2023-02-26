@@ -99,3 +99,5 @@ client.on('message', (message) => {
     stopMonitoring();
   }
 });
+
+client.login('YOUR_DISCORD_TOKEN_HERE');

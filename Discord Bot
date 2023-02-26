@@ -47,3 +47,19 @@ async function checkForChanges() {
   }
 }
 
+// Function to watch for changes in the spreadsheet
+async function watchForChanges() {
+  try {
+    const response = await drive.files.watch({
+      fileId: SPREADSHEET_ID,
+      requestBody: {
+        id: 'unique-id', // Replace with a unique ID
+        type: 'web_hook',
+        address: 'https://your-webhook-url.com', // Replace with a URL
+      },
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}

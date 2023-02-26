@@ -63,3 +63,9 @@ async function watchForChanges() {
     console.error(error);
   }
 }
+
+// Login the Discord Bot
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  watchForChanges();
+});

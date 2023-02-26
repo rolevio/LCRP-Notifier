@@ -64,8 +64,38 @@ async function watchForChanges() {
   }
 }
 
-// Login the Discord Bot
+// Function to start monitoring the spreadsheet
+function startMonitoring() {
+  if (!isNotifying) {
+    isNotifying = true;
+    intervalId = setInterval(checkForChanges, 30000); // Check for changes every 30 sec
+    sendMessage('Monitoring has started.');
+  } else {
+    sendMessage('Monitoring is already active.');
+  }
+}
+
+// Function to stop monitoring the spreadsheet
+function stopMonitoring() {
+  if (isNotifying) {
+    clearInterval(intervalId);
+    isNotifying = false;
+    sendMessage('Monitoring has stopped.');
+  } else {
+    sendMessage('Monitoring is not active.');
+  }
+}
+
+// Login the Discord bot and listen for commands
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  watchForChanges();
+});
+
+client.on('message', (message) => {
+  if (message.content === '!start-monitoring') {
+    startMonitoring();
+  }
+  if (message.content === '!stop-monitoring') {
+    stopMonitoring();
+  }
 });

@@ -1,0 +1,23 @@
+// Coded with Java Script (CODED BY Txctonic#6743)
+
+const Discord = require('discord.js');
+const { google } = require('googleapis');
+const auth = new google.auth.GoogleAuth({
+  scopes: ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
+});
+const drive = google.drive({ version: 'v3', auth });
+const sheets = google.sheets({ version: 'v4', auth });
+const client = new Discord.Client();
+
+// Constants
+const SPREADSHEET_ID = '11wOVNL0OkzGjUrPF85o-7KNfC6vx2hdSYEDMbZWG4fg';
+const RANGE = 'Sheet1!A:E';
+const COLUMN = 3; // Change to the column number you want to track
+const DISCORD_WEBHOOK_URL = 'INSERT_DISCORD_WEBHOOK_URL_HERE';
+let isNotifying = false;
+
+// Function to send a Discord message via webhook
+async function sendMessage(message) {
+  const webhook = new Discord.WebhookClient({ url: DISCORD_WEBHOOK_URL });
+  await webhook.send('@everyone ' + message); // Mention @everyone in the message
+}
